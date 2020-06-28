@@ -5,14 +5,14 @@ use yii\db\Migration;
 /**
  * Handles the creation of table `{{%return}}`.
  */
-class m200616_151126_create_return_table extends Migration
+class m200616_151126_create_returns_table extends Migration
 {
     /**
      * {@inheritdoc}
      */
     public function safeUp()
     {
-        $this->createTable('{{%return}}', [
+        $this->createTable('{{%returns}}', [
             'id' => $this->primaryKey(),
             'id_user' => $this->integer(),
             'id_booking' => $this->integer(),
@@ -20,8 +20,8 @@ class m200616_151126_create_return_table extends Migration
         ], 'engine=InnoDB');
 
         $this->addForeignKey(
-            'fk_return_user',
-            'return',
+            'fk_returns_user',
+            'returns',
             'id_user',
             'user',
             'id',
@@ -29,8 +29,8 @@ class m200616_151126_create_return_table extends Migration
         );
 
         $this->addForeignKey(
-            'fk_return_booking',
-            'return',
+            'fk_returns_booking',
+            'returns',
             'id_booking',
             'booking',
             'id',
@@ -43,6 +43,6 @@ class m200616_151126_create_return_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('{{%return}}');
+        $this->dropTable('{{%returns}}');
     }
 }
