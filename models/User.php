@@ -17,7 +17,6 @@ use Yii;
  * @property string|null $phone
  * @property int|null $status
  *
- * @property Booking[] $bookings
  * @property Returns[] $returns
  */
 class User extends \yii\db\ActiveRecord
@@ -57,16 +56,6 @@ class User extends \yii\db\ActiveRecord
             'phone' => 'Phone',
             'status' => 'Status',
         ];
-    }
-
-    /**
-     * Gets query for [[Bookings]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getBookings()
-    {
-        return $this->hasMany(Booking::className(), ['id_user' => 'id']);
     }
 
     /**

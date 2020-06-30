@@ -1,68 +1,59 @@
-<?php
-
-/* @var $this yii\web\View */
-/* @var $form yii\bootstrap\ActiveForm */
-/* @var $model app\models\ContactForm */
-
-use yii\helpers\Html;
-use yii\bootstrap\ActiveForm;
-use yii\captcha\Captcha;
-
-$this->title = 'Contact';
-$this->params['breadcrumbs'][] = $this->title;
-?>
-<div class="site-contact">
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <?php if (Yii::$app->session->hasFlash('contactFormSubmitted')): ?>
-
-        <div class="alert alert-success">
-            Thank you for contacting us. We will respond to you as soon as possible.
-        </div>
-
-        <p>
-            Note that if you turn on the Yii debugger, you should be able
-            to view the mail message on the mail panel of the debugger.
-            <?php if (Yii::$app->mailer->useFileTransport): ?>
-                Because the application is in development mode, the email is not sent but saved as
-                a file under <code><?= Yii::getAlias(Yii::$app->mailer->fileTransportPath) ?></code>.
-                Please configure the <code>useFileTransport</code> property of the <code>mail</code>
-                application component to be false to enable email sending.
-            <?php endif; ?>
-        </p>
-
-    <?php else: ?>
-
-        <p>
-            If you have business inquiries or other questions, please fill out the following form to contact us.
-            Thank you.
-        </p>
-
+<section class="banner-area">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-5">
-
-                <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
-
-                    <?= $form->field($model, 'name')->textInput(['autofocus' => true]) ?>
-
-                    <?= $form->field($model, 'email') ?>
-
-                    <?= $form->field($model, 'subject') ?>
-
-                    <?= $form->field($model, 'body')->textarea(['rows' => 6]) ?>
-
-                    <?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
-                        'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6">{input}</div></div>',
-                    ]) ?>
-
-                    <div class="form-group">
-                        <?= Html::submitButton('Submit', ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
-                    </div>
-
-                <?php ActiveForm::end(); ?>
-
+            <div class="col-lg-6 px-0">
+                <!--<div class="banner-bg"></div>-->
             </div>
         </div>
-
-    <?php endif; ?>
-</div>
+    </div>
+</section>
+<!-- Contact Form Starts -->
+<section class="contact-form section-padding3">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 mb-5 mb-lg-0">
+                <div class="d-flex">
+                    <div class="into-icon">
+                        <i class="fa fa-home"></i>
+                    </div>
+                    <div class="info-text">
+                        <h4>California, United States</h4>
+                        <p>Santa monica bullevard</p>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <div class="into-icon">
+                        <i class="fa fa-phone"></i>
+                    </div>
+                    <div class="info-text">
+                        <h4>00 (440) 9865 562</h4>
+                        <p>Mon to Fri 9am to 6 pm</p>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <div class="into-icon">
+                        <i class="fa fa-envelope-o"></i>
+                    </div>
+                    <div class="info-text">
+                        <h4>support@colorlib.com</h4>
+                        <p>Send us your query anytime!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <form action="#">
+                    <div class="left">
+                        <input type="text" placeholder="Enter your name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'" required>
+                        <input type="email" placeholder="Enter email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'" required>
+                        <input type="text" placeholder="Enter subject" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter subject'" required>
+                    </div>
+                    <div class="right">
+                        <textarea name="message" cols="20" rows="7"  placeholder="Enter Message" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Message'" required></textarea>
+                    </div>
+                    <button type="submit" class="template-btn">subscribe now</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Contact Form End -->

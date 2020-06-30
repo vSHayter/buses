@@ -17,8 +17,15 @@ class m200616_151042_create_booking_table extends Migration
             'date' => $this->date(),
             'amount' => $this->integer(),
             'code' => $this->string(),
+            'text' => $this->text(),
+
+            'name' => $this->string(),
+            'surname' => $this->string(),
+            'patronymic' => $this->string(),
+            'email' => $this->string(),
+            'phone' => $this->string(),
+
             'id_payment' => $this->integer(),
-            'id_user' => $this->integer(),
             'id_flight' => $this->integer(),
             'status' => $this->integer()
         ], 'engine=InnoDB');
@@ -28,15 +35,6 @@ class m200616_151042_create_booking_table extends Migration
             'booking',
             'id_payment',
             'payment',
-            'id',
-            'CASCADE'
-        );
-
-        $this->addForeignKey(
-            'fk_booking_user',
-            'booking',
-            'id_user',
-            'user',
             'id',
             'CASCADE'
         );

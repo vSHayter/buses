@@ -11,8 +11,7 @@ use Yii;
  * @property string|null $name
  * @property int|null $id_city
  *
- * @property Flight[] $flights
- * @property Flight[] $flights0
+ * @property Flight[] $flight
  * @property City $city
  * @property Stop[] $stops
  */
@@ -58,16 +57,6 @@ class Place extends \yii\db\ActiveRecord
     public function getFlights()
     {
         return $this->hasMany(Flight::className(), ['from' => 'id']);
-    }
-
-    /**
-     * Gets query for [[Flights0]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getFlights0()
-    {
-        return $this->hasMany(Flight::className(), ['to' => 'id']);
     }
 
     /**

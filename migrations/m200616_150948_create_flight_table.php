@@ -14,8 +14,8 @@ class m200616_150948_create_flight_table extends Migration
     {
         $this->createTable('{{%flight}}', [
             'id' => $this->primaryKey(),
-            'from' => $this->integer(),
-            'to' => $this->integer(),
+            'id_from' => $this->integer(),
+            'id_to' => $this->integer(),
             'time_start' => $this->time(),
             'time_end' => $this->time(),
             'period' => $this->string(),
@@ -34,7 +34,7 @@ class m200616_150948_create_flight_table extends Migration
         $this->addForeignKey(
             'fk_flight_from',
             'flight',
-            'from',
+            'id_from',
             'place',
             'id',
             'CASCADE'
@@ -43,7 +43,7 @@ class m200616_150948_create_flight_table extends Migration
         $this->addForeignKey(
             'fk_flight_to',
             'flight',
-            'to',
+            'id_to',
             'place',
             'id',
             'CASCADE'

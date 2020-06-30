@@ -3,14 +3,13 @@
 namespace app\models;
 
 use Yii;
-use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "flight".
  *
  * @property int $id
- * @property int|null $from
- * @property int|null $to
+ * @property int|null $id_from
+ * @property int|null $id_to
  * @property string|null $time_start
  * @property string|null $time_end
  * @property string|null $period
@@ -18,8 +17,8 @@ use yii\helpers\ArrayHelper;
  *
  * @property Booking[] $bookings
  * @property Bus $bus
- * @property Place $from0
- * @property Place $to0
+ * @property Place $from
+ * @property Place $to
  * @property Stop[] $stops
  */
 class Flight extends \yii\db\ActiveRecord
@@ -38,12 +37,12 @@ class Flight extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['from', 'to', 'id_bus'], 'integer'],
+            [['id_from', 'id_to', 'id_bus'], 'integer'],
             [['time_start', 'time_end'], 'safe'],
             [['period'], 'string', 'max' => 255],
             [['id_bus'], 'exist', 'skipOnError' => true, 'targetClass' => Bus::className(), 'targetAttribute' => ['id_bus' => 'id']],
-            [['from'], 'exist', 'skipOnError' => true, 'targetClass' => Place::className(), 'targetAttribute' => ['from' => 'id']],
-            [['to'], 'exist', 'skipOnError' => true, 'targetClass' => Place::className(), 'targetAttribute' => ['to' => 'id']],
+            [['id_from'], 'exist', 'skipOnError' => true, 'targetClass' => Place::className(), 'targetAttribute' => ['id_from' => 'id']],
+            [['id_to'], 'exist', 'skipOnError' => true, 'targetClass' => Place::className(), 'targetAttribute' => ['id_to' => 'id']],
         ];
     }
 
@@ -54,8 +53,8 @@ class Flight extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'from' => 'From',
-            'to' => 'To',
+            'id_from' => 'Id From',
+            'id_to' => 'Id To',
             'time_start' => 'Time Start',
             'time_end' => 'Time End',
             'period' => 'Period',
@@ -84,23 +83,23 @@ class Flight extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[From0]].
+     * Gets query for [[From]].
      *
      * @return \yii\db\ActiveQuery
      */
     public function getFrom()
     {
-        return $this->hasOne(Place::className(), ['id' => 'from']);
+        return $this->hasOne(Place::className(), ['id' => 'id_from']);
     }
 
     /**
-     * Gets query for [[To0]].
+     * Gets query for [[To]].
      *
      * @return \yii\db\ActiveQuery
      */
     public function getTo()
     {
-        return $this->hasOne(Place::className(), ['id' => 'to']);
+        return $this->hasOne(Place::className(), ['id' => 'id_to']);
     }
 
     /**

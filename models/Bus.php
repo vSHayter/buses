@@ -15,7 +15,7 @@ use Yii;
  * @property int|null $id_atp
  *
  * @property Atp $atp
- * @property Flight[] $flights
+ * @property Flight[] $flight
  */
 class Bus extends \yii\db\ActiveRecord
 {
