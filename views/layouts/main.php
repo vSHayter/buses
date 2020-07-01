@@ -54,8 +54,13 @@ use app\assets\AppAsset;
                         <li><a href="<?= Url::toRoute(['site/about'])?>">О нас</a></li>
                         <li><a href="<?= Url::toRoute(['site/contact'])?>">Свяжитесь с нами</a></li>
                         <li class="menu-btn">
-                            <a href="#" class="login">log in</a>
-                            <a href="#" class="template-btn">sign up</a>
+                            <?php if(Yii::$app->user->isGuest):?>
+                                <a href="<?= Url::toRoute(['auth/login']) ?>" class="login">Войти</a>
+                                <a href="<?= Url::toRoute(['auth/signup']) ?>" class="template-btn">Зарегистрироваться</a>
+                            <?php else: ?>
+                                <li><a href="<?= Url::toRoute(['booking/cancel'])?>">Отмена бронирования</a></li>
+                                <a href="<?= Url::toRoute(['auth/logout']) ?>" class="template-btn"><?= Yii::$app->user->identity->username ?></a>
+                            <?php endif; ?>
                         </li>
                     </ul>
                 </div>
