@@ -37,4 +37,13 @@ class FlightController extends Controller
             'places' => $places
         ]);
     }
+
+    public function  actionSingle($id)
+    {
+        $flight = Flight::findOne($id);
+
+        return $this->render('single', [
+            'flight' => $flight
+        ]);
+    }
 }

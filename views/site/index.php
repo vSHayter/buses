@@ -11,7 +11,7 @@ use yii\helpers\Url; ?>
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-6 px-0">
-                <!--<div class="banner-bg"></div>-->
+                <div class="banner-bg"></div>
             </div>
             <div class="col-lg-6 align-self-center">
                 <div class="banner-text">
@@ -81,7 +81,7 @@ use yii\helpers\Url; ?>
                                 </ul>
                             </div>
                             <div class="job-btn align-self-center">
-                                <a href="#" class="third-btn job-btn1">Просмотреть</a>
+                                <a href="<?= Url::toRoute(['flight/single', 'id' => $flight->id])?>" class="third-btn job-btn1">Просмотреть</a>
                                 <a href="<?= Url::toRoute(['booking/index', 'id'=> $flight->id])?>" class="third-btn">Забронировать</a>
                             </div>
                         </div>

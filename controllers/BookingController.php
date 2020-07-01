@@ -4,9 +4,7 @@ namespace app\controllers;
 
 use app\models\Booking;
 use app\models\Flight;
-use app\models\Guest;
 use app\models\Payment;
-use app\models\Place;
 use Yii;
 use yii\web\Controller;
 
@@ -29,33 +27,64 @@ class BookingController extends Controller
 
     public function actionBooking($id)
     {
-        $places = Place::find()->all();
-        $flights = Flight::find()->limit(3)->all();
+        $date = Yii::$app->request->post('date');
 
-        $values = [
-            'date' => Yii::$app->request->post('date'),
-            'amount' => Yii::$app->request->post('amount'),
-            'code' => strval(random_int(1000000000, 9999999999)),
-            'text' => Yii::$app->request->post('message'),
+        $queryCaparity = Flight::find()->select(['flight.*', 'buses.bus.capacity'])
+            ->joinWith('bus')
+            ->where(['flight.id' => $id])
+            ->one();
+        $queryBooking = Booking::find()->select(['booking.*', 'SUM(amount) as amount'])
+            ->where(['id_flight' => $id])
+            ->andWhere(['date' => $date])
+            ->all();
 
-            'name' => Yii::$app->request->post('name'),
-            'surname' => Yii::$app->request->post('surname'),
-            'patronymic' => Yii::$app->request->post('patronymic'),
-            'email' => Yii::$app->request->post('email'),
-            'phone' => Yii::$app->request->post('phone'),
+        $capacity = $queryCaparity->bus->capacity;
+        $amount = $queryBooking[0]->amount;
+        $amountBooking = Yii::$app->request->post('amount');
 
-            'id_payment' => Yii::$app->request->post('payment'),
-            'id_flight' => $id,
-            'status' => 0,
-        ];
+        if ($amountBooking < ($capacity - $amount)){
 
-        $booking = new Booking();
-        $booking->attributes = $values;
-        $booking->save();
+            $code = strval(random_int(1000000000, 9999999999));
 
-        return $this->render('../site/index', [
-            'places' => $places,
-            'flights' => $flights
-            ]);
+            $values = [
+                'date' => $date,//Yii::$app->request->post('date'),
+                'amount' => $amountBooking,//Yii::$app->request->post('amount'),
+                'code' => $code,//strval(random_int(1000000000, 9999999999)),
+                'text' => Yii::$app->request->post('message'),
+
+                'name' => Yii::$app->request->post('name'),
+                'surname' => Yii::$app->request->post('surname'),
+                'patronymic' => Yii::$app->request->post('patronymic'),
+                'email' => Yii::$app->request->post('email'),
+                'phone' => Yii::$app->request->post('phone'),
+
+                'id_payment' => Yii::$app->request->post('payment'),
+                'id_flight' => $id,
+                'status' => 0,
+            ];
+
+            $booking = new Booking();
+            $booking->attributes = $values;
+            $booking->save();
+
+            if ($amountBooking > 1)
+                $msg = "Билеты забронированы!"."</br>"."Код бронирования: " . strval($code);
+            else
+                $msg = "Билет забронирован!"."</br>"."Код бронирования: " . strval($code);
+            $error = 0;
+        } else {
+            if ($amountBooking > 1)
+                $msg = "Билеты не забронированы!"."</br>"."Свободно мест на этот рейс: " . strval($capacity - $amount);
+            else
+                $msg = "Билет не забронирован!"."</br>"."Cвободных мест на этот рейс нет.";
+            $error = 1;
+        }
+
+        Yii::$app->session->setFlash('Информация', $msg);
+
+        return $this->render('../site/message', [
+            'message' => $msg,
+            'error' => $error
+        ]);
     }
 }
