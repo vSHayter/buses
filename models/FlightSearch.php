@@ -17,7 +17,7 @@ class FlightSearch extends Flight
     public function rules()
     {
         return [
-            [['id', 'from', 'to', 'id_bus'], 'integer'],
+            [['id', 'id_from', 'id_to', 'id_bus'], 'integer'],
             [['time_start', 'time_end', 'period'], 'safe'],
         ];
     }
@@ -59,8 +59,8 @@ class FlightSearch extends Flight
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'from' => $this->from,
-            'to' => $this->to,
+            'id_from' => $this->id_from,
+            'id_to' => $this->id_to,
             'time_start' => $this->time_start,
             'time_end' => $this->time_end,
             'id_bus' => $this->id_bus,

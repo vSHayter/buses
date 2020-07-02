@@ -12,9 +12,9 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'from')->textInput() ?>
+    <?= $form->field($model, 'id_from')->textInput() ?>
 
-    <?= $form->field($model, 'to')->textInput() ?>
+    <?= $form->field($model, 'id_to')->textInput() ?>
 
     <?= $form->field($model, 'time_start')->textInput() ?>
 
