@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\BookingSearch */
@@ -39,15 +40,24 @@ $this->params['breadcrumbs'][] = $this->title;
             //'id_payment',
             'id_flight',
             'status',
-            //['class' => 'yii\grid\ActionColumn'],
-
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{view} {update} {delete} {approve}',
+                'template' => '{view} {drop}',
                 'buttons' => [
-                    'approve' => function($url, $model, $key) {
-                        return Html::a('Approve', $url, ['class' => 'btn btn-success btn-xs', 'data-pjax' => 0]);
-                    }]
+                    'drop' => function($url, $model, $key) {
+                        return Html::a('Drop', $url, ['class' => 'btn btn-success btn-xs', 'data-pjax' => 0]);
+                    }
+                ],
+                'urlCreator' => function ($action, $model, $key, $index) {
+                    if ($action === 'view') {
+                        $url ='cancel-view?id='.$model->id;
+                        return $url;
+                    }
+                    if ($action === 'drop') {
+                        $url ='drop?id='.$model->id;
+                        return $url;
+                    }
+                },
             ]
         ],
     ]); ?>

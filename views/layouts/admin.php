@@ -48,6 +48,7 @@ AppAsset::register($this);
                 ['label' => 'Flight', 'url' => ['/admin/flight/index']],
 
                 ['label' => 'Booking', 'url' => ['/admin/booking/index']],
+                ['label' => 'Cancel Booking', 'url' => ['/admin/booking/cancel']],
 
                 /*Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]

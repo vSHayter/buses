@@ -17,8 +17,8 @@ class BookingSearch extends Booking
     public function rules()
     {
         return [
-            [['id', 'amount', 'id_payment', 'id_guest', 'id_flight', 'status'], 'integer'],
-            [['date', 'code'], 'safe'],
+            [['id', 'amount', 'id_payment', 'id_flight', 'status'], 'integer'],
+            [['date', 'code', 'text', 'name', 'surname', 'patronymic', 'email', 'phone'], 'safe'],
         ];
     }
 
@@ -38,10 +38,10 @@ class BookingSearch extends Booking
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params, $status)
     {
         $query = Booking::find();
-
+        $query->andWhere(['status' => $status]);
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
@@ -62,12 +62,17 @@ class BookingSearch extends Booking
             'date' => $this->date,
             'amount' => $this->amount,
             'id_payment' => $this->id_payment,
-            'id_guest' => $this->id_guest,
             'id_flight' => $this->id_flight,
             'status' => $this->status,
         ]);
 
-        $query->andFilterWhere(['like', 'code', $this->code]);
+        $query->andFilterWhere(['like', 'code', $this->code])
+            ->andFilterWhere(['like', 'text', $this->text])
+            ->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'surname', $this->surname])
+            ->andFilterWhere(['like', 'patronymic', $this->patronymic])
+            ->andFilterWhere(['like', 'email', $this->email])
+            ->andFilterWhere(['like', 'phone', $this->phone]);
 
         return $dataProvider;
     }

@@ -23,9 +23,19 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'code') ?>
 
-    <?= $form->field($model, 'id_payment') ?>
+    <?= $form->field($model, 'text') ?>
 
-    <?php // echo $form->field($model, 'id_guest') ?>
+    <?php // echo $form->field($model, 'name') ?>
+
+    <?php // echo $form->field($model, 'surname') ?>
+
+    <?php // echo $form->field($model, 'patronymic') ?>
+
+    <?php // echo $form->field($model, 'email') ?>
+
+    <?php // echo $form->field($model, 'phone') ?>
+
+    <?php // echo $form->field($model, 'id_payment') ?>
 
     <?php // echo $form->field($model, 'id_flight') ?>
 

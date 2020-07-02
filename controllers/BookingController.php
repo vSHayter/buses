@@ -6,6 +6,7 @@ use app\models\Booking;
 use app\models\Flight;
 use app\models\Payment;
 use app\models\Place;
+use app\models\Returns;
 use Yii;
 use yii\web\Controller;
 
@@ -101,11 +102,23 @@ class BookingController extends Controller
     public function actionDrop()
     {
         $code = Yii::$app->request->post('code');
+
         $query = Booking::find()
             ->where(['code' => $code])
+            ->andWhere(['<','status', 5])
             ->one();
 
         if ($query) {
+            $values = [
+                'id_user' => Yii::$app->user->identity->getId(),
+                'id_booking' => $query->id,
+                'ticket' => $code
+            ];
+
+            $return = new Returns();
+            $return->attributes = $values;
+            $return->save();
+
             $query->status = 5;
             $query->save();
 

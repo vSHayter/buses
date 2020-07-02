@@ -35,8 +35,9 @@ class BookingController extends Controller
      */
     public function actionIndex()
     {
+        $status = 0;
         $searchModel = new BookingSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $status);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -123,5 +124,42 @@ class BookingController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionCancel()
+    {
+        $status = 5;
+        $searchModel = new BookingSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $status);
+
+        return $this->render('cancel', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionApprove($id)
+    {
+        $booking = Booking::findOne($id);
+        $booking->status = 1;
+        $booking->save();
+
+        return $this->redirect(['view', 'id' => $booking->id]);
+    }
+
+    public function actionCancelView($id)
+    {
+        return $this->render('cancelView', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+
+    public function actionDrop($id)
+    {
+        $booking = Booking::findOne($id);
+        $booking->status = 6;
+        $booking->save();
+
+        return $this->redirect(['cancel']);
     }
 }

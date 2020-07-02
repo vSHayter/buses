@@ -18,9 +18,19 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'code')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'id_payment')->textInput() ?>
+    <?= $form->field($model, 'text')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'id_guest')->textInput() ?>
+    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'surname')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'patronymic')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'id_payment')->textInput() ?>
 
     <?= $form->field($model, 'id_flight')->textInput() ?>
 
