@@ -2,13 +2,13 @@
 
 namespace app\controllers;
 
-use app\models\Flight;
+use app\models\Trip;
 use app\models\Place;
 use Yii;
 use yii\web\Controller;
 
 
-class FlightController extends Controller
+class TripController extends Controller
 {
     public function actionSearch()
     {
@@ -16,34 +16,34 @@ class FlightController extends Controller
         $to = Yii::$app->request->get('to');
         $places = Place::find()->all();
 
-        $flight = Flight::find()
+        $trip = Trip::find()
             ->where(['id_from' => $from])
             ->andWhere(['id_to' => $to])
             ->all();
 
         return $this->render('all', [
-            'flights' => $flight,
+            'trips' => $trip,
             'places' => $places
         ]);
     }
 
     public function actionAll()
     {
-        $flights = Flight::find()->all();
+        $trip = Trip::find()->all();
         $places = Place::find()->all();
 
         return $this->render('all', [
-            'flights' => $flights,
+            'trips' => $trip,
             'places' => $places
         ]);
     }
 
     public function  actionSingle($id)
     {
-        $flight = Flight::findOne($id);
+        $trip = Trip::findOne($id);
 
         return $this->render('single', [
-            'flight' => $flight
+            'trip' => $trip
         ]);
     }
 }

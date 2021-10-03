@@ -14,15 +14,15 @@ class m200616_155412_create_stop_table extends Migration
     {
         $this->createTable('{{%stop}}', [
             'id' => $this->primaryKey(),
-            'id_flight' => $this->integer(),
+            'id_trip' => $this->integer(),
             'id_place' => $this->integer()
         ], 'engine=InnoDB');
 
         $this->addForeignKey(
-            'fk_stop_flight',
+            'fk_stop_trip',
             'stop',
-            'id_flight',
-            'flight',
+            'id_trip',
+            'trip',
             'id',
             'CASCADE'
         );
@@ -42,6 +42,8 @@ class m200616_155412_create_stop_table extends Migration
      */
     public function safeDown()
     {
+        $this->dropForeignKey('fk_stop_trip','stop');
+        $this->dropForeignKey('fk_stop_place','stop');
         $this->dropTable('{{%stop}}');
     }
 }

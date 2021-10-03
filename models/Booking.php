@@ -18,10 +18,10 @@ use Yii;
  * @property string|null $email
  * @property string|null $phone
  * @property int|null $id_payment
- * @property int|null $id_flight
+ * @property int|null $id_trip
  * @property int|null $status
  *
- * @property Flight $flight
+ * @property Trip $trip
  * @property Payment $payment
  * @property Returns[] $returns
  */
@@ -42,11 +42,11 @@ class Booking extends \yii\db\ActiveRecord
     {
         return [
             [['date'], 'safe'],
-            [['amount', 'id_payment', 'id_flight', 'status'], 'integer'],
+            [['amount', 'id_payment', 'id_trip', 'status'], 'integer'],
             [['text'], 'string'],
             [['code', 'name', 'surname', 'patronymic', 'email', 'phone'], 'string', 'max' => 255],
-            [['id_flight'], 'exist', 'skipOnError' => true, 'targetClass' => Flight::className(), 'targetAttribute' => ['id_flight' => 'id']],
-            [['id_payment'], 'exist', 'skipOnError' => true, 'targetClass' => Payment::className(), 'targetAttribute' => ['id_payment' => 'id']],
+            [['id_trip'], 'exist', 'skipOnError' => true, 'targetClass' => Trip::class, 'targetAttribute' => ['id_trip' => 'id']],
+            [['id_payment'], 'exist', 'skipOnError' => true, 'targetClass' => Payment::class, 'targetAttribute' => ['id_payment' => 'id']],
         ];
     }
 
@@ -67,19 +67,19 @@ class Booking extends \yii\db\ActiveRecord
             'email' => 'Email',
             'phone' => 'Phone',
             'id_payment' => 'Id Payment',
-            'id_flight' => 'Id Flight',
+            'id_trip' => 'Id Trip',
             'status' => 'Status',
         ];
     }
 
     /**
-     * Gets query for [[Flight]].
+     * Gets query for [[Trip]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getFlight()
+    public function getTrip()
     {
-        return $this->hasOne(Flight::className(), ['id' => 'id_flight']);
+        return $this->hasOne(Trip::class, ['id' => 'id_trip']);
     }
 
     /**
@@ -89,7 +89,7 @@ class Booking extends \yii\db\ActiveRecord
      */
     public function getPayment()
     {
-        return $this->hasOne(Payment::className(), ['id' => 'id_payment']);
+        return $this->hasOne(Payment::class, ['id' => 'id_payment']);
     }
 
     /**
@@ -99,6 +99,6 @@ class Booking extends \yii\db\ActiveRecord
      */
     public function getReturns()
     {
-        return $this->hasMany(Returns::className(), ['id_booking' => 'id']);
+        return $this->hasMany(Returns::class, ['id_booking' => 'id']);
     }
 }

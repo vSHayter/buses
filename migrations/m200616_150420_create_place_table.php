@@ -33,6 +33,7 @@ class m200616_150420_create_place_table extends Migration
      */
     public function safeDown()
     {
+        $this->dropForeignKey('fm_place_city', 'place');
         $this->dropTable('{{%place}}');
     }
 }

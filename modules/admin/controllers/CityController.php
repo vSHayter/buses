@@ -4,7 +4,7 @@ namespace app\modules\admin\controllers;
 
 use app\models\Country;
 use Yii;
-use app\models\City;
+use app\modules\admin\models\CityAdmin;
 use app\models\CitySearch;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
@@ -23,7 +23,7 @@ class CityController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -66,7 +66,7 @@ class CityController extends Controller
      */
     public function actionCreate()
     {
-        $model = new City();
+        $model = new CityAdmin();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -115,12 +115,12 @@ class CityController extends Controller
      * Finds the City model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return City the loaded model
+     * @return CityAdmin the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = City::findOne($id)) !== null) {
+        if (($model = CityAdmin::findOne($id)) !== null) {
             return $model;
         }
 

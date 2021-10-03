@@ -17,8 +17,8 @@
                         <i class="fa fa-home"></i>
                     </div>
                     <div class="info-text">
-                        <h4>California, United States</h4>
-                        <p>Santa monica bullevard</p>
+                        <h4>Donetsk, Ukraine</h4>
+                        <p>Artema st.</p>
                     </div>
                 </div>
                 <div class="d-flex">
@@ -26,8 +26,8 @@
                         <i class="fa fa-phone"></i>
                     </div>
                     <div class="info-text">
-                        <h4>00 (440) 9865 562</h4>
-                        <p>Mon to Fri 9am to 6 pm</p>
+                        <h4>+38(071)555 85 52</h4>
+                        <p>Mon to Fri 8 am to 6 pm</p>
                     </div>
                 </div>
                 <div class="d-flex">
@@ -35,7 +35,7 @@
                         <i class="fa fa-envelope-o"></i>
                     </div>
                     <div class="info-text">
-                        <h4>support@colorlib.com</h4>
+                        <h4>support@gmail.com</h4>
                         <p>Send us your query anytime!</p>
                     </div>
                 </div>

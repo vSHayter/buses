@@ -37,7 +37,7 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'id_payment') ?>
 
-    <?php // echo $form->field($model, 'id_flight') ?>
+    <?php // echo $form->field($model, 'id_trip') ?>
 
     <?php // echo $form->field($model, 'status') ?>
 

@@ -17,7 +17,7 @@ class BookingSearch extends Booking
     public function rules()
     {
         return [
-            [['id', 'amount', 'id_payment', 'id_flight', 'status'], 'integer'],
+            [['id', 'amount', 'id_payment', 'id_trip', 'status'], 'integer'],
             [['date', 'code', 'text', 'name', 'surname', 'patronymic', 'email', 'phone'], 'safe'],
         ];
     }
@@ -62,7 +62,7 @@ class BookingSearch extends Booking
             'date' => $this->date,
             'amount' => $this->amount,
             'id_payment' => $this->id_payment,
-            'id_flight' => $this->id_flight,
+            'id_trip' => $this->id_trip,
             'status' => $this->status,
         ]);
 

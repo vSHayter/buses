@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Flight;
+use app\models\Trip;
 
 /**
- * FlightSearch represents the model behind the search form of `app\models\Flight`.
+ * TripSearch represents the model behind the search form of `app\models\Trip`.
  */
-class FlightSearch extends Flight
+class TripSearch extends Trip
 {
     /**
      * {@inheritdoc}
@@ -40,7 +40,7 @@ class FlightSearch extends Flight
      */
     public function search($params)
     {
-        $query = Flight::find();
+        $query = Trip::find();
 
         // add conditions that should always apply here
 

@@ -4,7 +4,7 @@ namespace app\modules\admin\controllers;
 
 use app\models\City;
 use Yii;
-use app\models\Place;
+use app\modules\admin\models\PlaceAdmin;
 use app\models\PlaceSearch;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
@@ -23,7 +23,7 @@ class PlaceController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -66,7 +66,7 @@ class PlaceController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Place();
+        $model = new PlaceAdmin();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -115,12 +115,12 @@ class PlaceController extends Controller
      * Finds the Place model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Place the loaded model
+     * @return PlaceAdmin the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Place::findOne($id)) !== null) {
+        if (($model = PlaceAdmin::findOne($id)) !== null) {
             return $model;
         }
 

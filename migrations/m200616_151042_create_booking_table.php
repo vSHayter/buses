@@ -26,7 +26,7 @@ class m200616_151042_create_booking_table extends Migration
             'phone' => $this->string(),
 
             'id_payment' => $this->integer(),
-            'id_flight' => $this->integer(),
+            'id_trip' => $this->integer(),
             'status' => $this->integer()
         ], 'engine=InnoDB');
 
@@ -40,10 +40,10 @@ class m200616_151042_create_booking_table extends Migration
         );
 
         $this->addForeignKey(
-            'fk_booking_flight',
+            'fk_booking_trip',
             'booking',
-            'id_flight',
-            'flight',
+            'id_trip',
+            'trip',
             'id',
             'CASCADE'
         );
@@ -54,6 +54,8 @@ class m200616_151042_create_booking_table extends Migration
      */
     public function safeDown()
     {
+        $this->dropForeignKey('fk_booking_payment','booking');
+        $this->dropForeignKey('fk_booking_trip','booking');
         $this->dropTable('{{%booking}}');
     }
 }

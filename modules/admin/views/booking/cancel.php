@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'email:email',
             'phone',
             //'id_payment',
-            'id_flight',
+            'id_trip',
             'status',
             [
                 'class' => 'yii\grid\ActionColumn',

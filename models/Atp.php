@@ -50,6 +50,6 @@ class Atp extends \yii\db\ActiveRecord
      */
     public function getBuses()
     {
-        return $this->hasMany(Bus::className(), ['id_atp' => 'id']);
+        return $this->hasMany(Bus::class, ['id_atp' => 'id']);
     }
 }

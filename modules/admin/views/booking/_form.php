@@ -32,7 +32,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id_payment')->textInput() ?>
 
-    <?= $form->field($model, 'id_flight')->textInput() ?>
+    <?= $form->field($model, 'id_trip')->textInput() ?>
 
     <?= $form->field($model, 'status')->textInput() ?>
 

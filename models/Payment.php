@@ -50,6 +50,6 @@ class Payment extends \yii\db\ActiveRecord
      */
     public function getBookings()
     {
-        return $this->hasMany(Booking::className(), ['id_payment' => 'id']);
+        return $this->hasMany(Booking::class, ['id_payment' => 'id']);
     }
 }

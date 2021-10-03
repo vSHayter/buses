@@ -36,6 +36,7 @@ class m200616_150507_create_bus_table extends Migration
      */
     public function safeDown()
     {
+        $this->dropForeignKey('fk_bus_atp', 'bus');
         $this->dropTable('{{%bus}}');
     }
 }

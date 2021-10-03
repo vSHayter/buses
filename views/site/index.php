@@ -1,7 +1,7 @@
 <?php
 /**
  * @var $places \app\models\Place[]
- * @var $flights \app\models\Flight[]
+ * @var $trips \app\models\Trip[]
  */
 
 use yii\helpers\Url; ?>
@@ -15,8 +15,8 @@ use yii\helpers\Url; ?>
             </div>
             <div class="col-lg-6 align-self-center">
                 <div class="banner-text">
-                    <h1>Автовокзалы Донбасса 2.0</h1>
-                    <p class="py-3">Работаем каждый день, без выходных и праздников!</p>
+                    <h1>Автовокзалы 2.0</h1>
+                    <p class="py-3">Работаем каждый день, даже в выходные и праздники!</p>
                     <a href="#" class="secondary-btn">Начать сейчас<span class="flaticon-next"></span></a>
                 </div>
             </div>
@@ -26,33 +26,10 @@ use yii\helpers\Url; ?>
 <!-- Banner Area End -->
 
 <!-- Search Area Starts -->
-<div class="search-area">
-    <div class="search-bg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <form action="<?= Url::to(['flight/search']) ?>" class="d-md-flex justify-content-between" >
-                        <select name="from" size="5">
-                            <?php foreach ($places as $place): ?>
-                            <option value="<?=$place->id?>"><?=$place->name?></option>
-                            <?php endforeach; ?>
-                        </select>
-                        <select name="to" size="5">
-                            <?php foreach ($places as $place): ?>
-                                <option value="<?=$place->id?>"><?=$place->name?></option>
-                            <?php endforeach; ?>
-                        </select>
-                        <!--<input type="text" placeholder="Search Keyword" onfocus="this.placeholder = ''" onblur="this.placeholder = ''">-->
-                        <button type="submit" formmethod="get" class="template-btn">Поиск рейса</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<?= $this->render('search', ['places' => $places]); ?>
 <!-- Search Area End -->
 
-<!-- Jobs Area Starts -->
+<!-- Trip Area Starts -->
 <section class="jobs-area section-padding3">
     <div class="container">
         <div class="row">
@@ -66,23 +43,23 @@ use yii\helpers\Url; ?>
             <div class="col-lg-12">
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="recent" role="tabpanel" aria-labelledby="home-tab">
-                        <?php foreach ($flights as $flight): ?>
+                        <?php foreach ($trips as $trip): ?>
                         <div class="single-job mb-4 d-lg-flex justify-content-between">
                             <div class="job-text">
-                                <h4><?= $flight->from->name?> - <?=$flight->to->name?></h4>
+                                <h4><?= $trip->from->name?> - <?=$trip->to->name?></h4>
                                 <ul class="mt-4">
                                     <li class="mb-3"><h5><i class="fa fa-map-marker"></i>Остановки:
-                                            <?php foreach ($flight->stops as $stop): ?>
+                                            <?php foreach ($trip->stops as $stop): ?>
                                             <?= $stop->place->name ?>
                                             <?php endforeach; ?>
                                         </h5></li>
-                                    <li class="mb-3"><h5><i class="fa fa-calendar"></i>Период: <?= $flight->period ?></h5></li>
-                                    <li><h5><i class="fa fa-clock-o"></i> Отправление-Прибытие: <?= $flight->time_start ?> - <?= $flight->time_end ?></h5></li>
+                                    <li class="mb-3"><h5><i class="fa fa-calendar"></i>Период: <?= $trip->period ?></h5></li>
+                                    <li><h5><i class="fa fa-clock-o"></i> Отправление-Прибытие: <?= $trip->time_start ?> - <?= $trip->time_end ?></h5></li>
                                 </ul>
                             </div>
                             <div class="job-btn align-self-center">
-                                <a href="<?= Url::toRoute(['flight/single', 'id' => $flight->id])?>" class="third-btn job-btn1">Просмотреть</a>
-                                <a href="<?= Url::toRoute(['booking/index', 'id'=> $flight->id])?>" class="third-btn">Забронировать</a>
+                                <a href="<?= Url::toRoute(['trip/single', 'id' => $trip->id])?>" class="third-btn job-btn1">Просмотреть</a>
+                                <a href="<?= Url::toRoute(['booking/index', 'id'=> $trip->id])?>" class="third-btn">Забронировать</a>
                             </div>
                         </div>
                         <?php endforeach; ?>
@@ -91,11 +68,11 @@ use yii\helpers\Url; ?>
             </div>
         </div>
         <div class="more-job-btn mt-5 text-center">
-            <a href="<?= Url::to(['flight/all'])?>" class="template-btn">Больше рейсов</a>
+            <a href="<?= Url::to(['trip/all'])?>" class="template-btn">Больше рейсов</a>
         </div>
     </div>
 </section>
-<!-- Jobs Area End -->
+<!-- Trip Area End -->
 
 <!-- Download Area Starts -->
 <section class="download-area section-padding">

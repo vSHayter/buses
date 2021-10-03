@@ -2,14 +2,13 @@
 
 namespace app\controllers;
 
-use app\models\Flight;
+use app\models\Trip;
 use app\models\Place;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
-use app\models\LoginForm;
 use app\models\ContactForm;
 
 class SiteController extends Controller
@@ -64,45 +63,12 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $places = Place::find()->all();
-        $flights = Flight::find()->limit(3)->all();
+        $trips = Trip::find()->limit(3)->all();
+
         return $this->render('index', [
             'places' => $places,
-            'flights' => $flights
+            'trips' => $trips
         ]);
-    }
-
-    /**
-     * Login action.
-     *
-     * @return Response|string
-     */
-    public function actionLogin()
-    {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        }
-
-        $model->password = '';
-        return $this->render('login', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Logout action.
-     *
-     * @return Response
-     */
-    public function actionLogout()
-    {
-        Yii::$app->user->logout();
-
-        return $this->goHome();
     }
 
     /**

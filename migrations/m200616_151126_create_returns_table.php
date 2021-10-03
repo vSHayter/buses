@@ -43,6 +43,8 @@ class m200616_151126_create_returns_table extends Migration
      */
     public function safeDown()
     {
+        $this->dropForeignKey('fk_returns_user','returns');
+        $this->dropForeignKey('fk_returns_booking','returns');
         $this->dropTable('{{%returns}}');
     }
 }

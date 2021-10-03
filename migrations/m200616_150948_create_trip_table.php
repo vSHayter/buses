@@ -3,16 +3,16 @@
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `{{%flight}}`.
+ * Handles the creation of table `{{%trip}}`.
  */
-class m200616_150948_create_flight_table extends Migration
+class m200616_150948_create_trip_table extends Migration
 {
     /**
      * {@inheritdoc}
      */
     public function safeUp()
     {
-        $this->createTable('{{%flight}}', [
+        $this->createTable('{{%trip}}', [
             'id' => $this->primaryKey(),
             'id_from' => $this->integer(),
             'id_to' => $this->integer(),
@@ -20,11 +20,11 @@ class m200616_150948_create_flight_table extends Migration
             'time_end' => $this->time(),
             'period' => $this->string(),
             'id_bus' => $this->integer()
-        ]);
+        ], 'engine=InnoDB');
 
         $this->addForeignKey(
-            'fk_flight_bus',
-            'flight',
+            'fk_trip_bus',
+            'trip',
             'id_bus',
             'bus',
             'id',
@@ -32,8 +32,8 @@ class m200616_150948_create_flight_table extends Migration
         );
 
         $this->addForeignKey(
-            'fk_flight_from',
-            'flight',
+            'fk_trip_from',
+            'trip',
             'id_from',
             'place',
             'id',
@@ -41,8 +41,8 @@ class m200616_150948_create_flight_table extends Migration
         );
 
         $this->addForeignKey(
-            'fk_flight_to',
-            'flight',
+            'fk_trip_to',
+            'trip',
             'id_to',
             'place',
             'id',
@@ -55,6 +55,9 @@ class m200616_150948_create_flight_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('{{%flight}}');
+        $this->dropForeignKey('fk_trip_bus', 'trip');
+        $this->dropForeignKey('fk_trip_from', 'trip');
+        $this->dropForeignKey('fk_trip_to', 'trip');
+        $this->dropTable('{{%trip}}');
     }
 }

@@ -33,6 +33,7 @@ class m200616_150415_create_city_table extends Migration
      */
     public function safeDown()
     {
+        $this->dropForeignKey('fk_city_country', 'city');
         $this->dropTable('{{%city}}');
     }
 }

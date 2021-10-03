@@ -5,17 +5,17 @@ namespace app\modules\admin\controllers;
 use app\models\Bus;
 use app\models\Place;
 use Yii;
-use app\models\Flight;
-use app\models\FlightSearch;
+use app\modules\admin\models\TripAdmin;
+use app\models\TripSearch;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * FlightController implements the CRUD actions for Flight model.
+ * TripController implements the CRUD actions for Trip model.
  */
-class FlightController extends Controller
+class TripController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -24,7 +24,7 @@ class FlightController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -33,12 +33,12 @@ class FlightController extends Controller
     }
 
     /**
-     * Lists all Flight models.
+     * Lists all Trip models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new FlightSearch();
+        $searchModel = new TripSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -48,7 +48,7 @@ class FlightController extends Controller
     }
 
     /**
-     * Displays a single Flight model.
+     * Displays a single Trip model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -61,13 +61,13 @@ class FlightController extends Controller
     }
 
     /**
-     * Creates a new Flight model.
+     * Creates a new Trip model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Flight();
+        $model = new TripAdmin();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -79,7 +79,7 @@ class FlightController extends Controller
     }
 
     /**
-     * Updates an existing Flight model.
+     * Updates an existing Trip model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -99,7 +99,7 @@ class FlightController extends Controller
     }
 
     /**
-     * Deletes an existing Flight model.
+     * Deletes an existing Trip model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -113,15 +113,15 @@ class FlightController extends Controller
     }
 
     /**
-     * Finds the Flight model based on its primary key value.
+     * Finds the Trip model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Flight the loaded model
+     * @return TripAdmin the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Flight::findOne($id)) !== null) {
+        if (($model = TripAdmin::findOne($id)) !== null) {
             return $model;
         }
 
@@ -130,20 +130,20 @@ class FlightController extends Controller
 
     public function actionSetFromTo($id)
     {
-        $flight = $this->findModel($id);
-        $selectedFrom = $flight->from;
-        $selectedTo = $flight->to;
+        $trip = $this->findModel($id);
+        $selectedFrom = $trip->from;
+        $selectedTo = $trip->to;
         $fromTo = ArrayHelper::map(Place::find()->all(), 'id', 'name');
 
         if (Yii::$app->request->isPost) {
             $from = Yii::$app->request->post('from');
             $to = Yii::$app->request->post('to');
-            if ($flight->saveFromTo($from, $to))
-                return $this->redirect(['view', 'id' => $flight->id]);
+            if ($trip->saveFromTo($from, $to))
+                return $this->redirect(['view', 'id' => $trip->id]);
         }
 
         return $this->render('fromTo', [
-            'flight' => $flight,
+            'trip' => $trip,
             'selectedFrom' => $selectedFrom,
             'selectedTo' => $selectedTo,
             'fromTo' => $fromTo
@@ -152,18 +152,18 @@ class FlightController extends Controller
 
     public function actionSetBus($id)
     {
-        $flight = $this->findModel($id);
-        $selectedBus = $flight->id_bus;
+        $trip = $this->findModel($id);
+        $selectedBus = $trip->id_bus;
         $bus = ArrayHelper::map(Bus::find()->all(), 'id', 'model');
 
         if (Yii::$app->request->isPost) {
             $bus = Yii::$app->request->post('bus');
-            if ($flight->saveBus($bus))
-                return $this->redirect(['view', 'id' => $flight->id]);
+            if ($trip->saveBus($bus))
+                return $this->redirect(['view', 'id' => $trip->id]);
         }
 
         return $this->render('bus', [
-            'flight' => $flight,
+            'trip' => $trip,
             'selectedBus' => $selectedBus,
             'bus' => $bus
         ]);
@@ -171,19 +171,18 @@ class FlightController extends Controller
 
     public function actionSetStop($id)
     {
-        $flight = $this->findModel($id);
-        $selectedStop = $flight->selectedStops;
+        $trip = $this->findModel($id);
+        $selectedStop = $trip->selectedStops;
         $place = ArrayHelper::map(Place::find()->all(), 'id', 'name');
 
         if (Yii::$app->request->isPost) {
             $place = Yii::$app->request->post('place');
-            //var_dump($flight->saveStops($place));die;
-            if ($flight->saveStops($place))
-                return $this->redirect(['view', 'id' => $flight->id]);
+            if ($trip->saveStops($place))
+                return $this->redirect(['view', 'id' => $trip->id]);
         }
 
         return $this->render('stop', [
-            'flight' => $flight,
+            'trip' => $trip,
             'selectedStop' => $selectedStop,
             'place' => $place
         ]);

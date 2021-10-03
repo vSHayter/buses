@@ -2,10 +2,10 @@
 
 namespace app\modules\admin\controllers;
 
+
 use app\models\Atp;
-use app\models\City;
 use Yii;
-use app\models\Bus;
+use app\modules\admin\models\BusAdmin;
 use app\models\BusSearch;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
@@ -24,7 +24,7 @@ class BusController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -67,7 +67,7 @@ class BusController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Bus();
+        $model = new BusAdmin();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -116,12 +116,12 @@ class BusController extends Controller
      * Finds the Bus model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Bus the loaded model
+     * @return BusAdmin the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Bus::findOne($id)) !== null) {
+        if (($model = BusAdmin::findOne($id)) !== null) {
             return $model;
         }
 
@@ -131,6 +131,7 @@ class BusController extends Controller
     public function actionSetAtp($id)
     {
         $bus = $this->findModel($id);
+
         $selectedAtp = $bus->id_atp;
         $atp = ArrayHelper::map(Atp::find()->all(), 'id', 'name');
 

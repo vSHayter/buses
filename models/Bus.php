@@ -15,7 +15,7 @@ use Yii;
  * @property int|null $id_atp
  *
  * @property Atp $atp
- * @property Flight[] $flight
+ * @property Trip[] $trip
  */
 class Bus extends \yii\db\ActiveRecord
 {
@@ -35,7 +35,7 @@ class Bus extends \yii\db\ActiveRecord
         return [
             [['capacity', 'id_atp'], 'integer'],
             [['model', 'number', 'carrier'], 'string', 'max' => 255],
-            [['id_atp'], 'exist', 'skipOnError' => true, 'targetClass' => Atp::className(), 'targetAttribute' => ['id_atp' => 'id']],
+            [['id_atp'], 'exist', 'skipOnError' => true, 'targetClass' => Atp::class, 'targetAttribute' => ['id_atp' => 'id']],
         ];
     }
 
@@ -61,26 +61,17 @@ class Bus extends \yii\db\ActiveRecord
      */
     public function getAtp()
     {
-        return $this->hasOne(Atp::className(), ['id' => 'id_atp']);
+        return $this->hasOne(Atp::class, ['id' => 'id_atp']);
     }
 
     /**
-     * Gets query for [[Flights]].
+     * Gets query for [[Trips]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getFlights()
+    public function getTrips()
     {
-        return $this->hasMany(Flight::className(), ['id_bus' => 'id']);
+        return $this->hasMany(Trip::class, ['id_bus' => 'id']);
     }
 
-    public function saveAtp($id_atp)
-    {
-        $atp = Atp::findOne($id_atp);
-        if ($atp != null)
-        {
-            $this->link('atp', $atp);
-            return true;
-        }
-    }
 }

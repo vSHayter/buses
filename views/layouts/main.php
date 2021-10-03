@@ -102,14 +102,14 @@ use app\assets\AppAsset;
                     <div class="single-widge-home">
                         <h3 class="mb-4">instagram feed</h3>
                         <div class="feed">
-                            <img src="comport/assets/images/feed1.jpg" alt="feed">
-                            <img src="comport/assets/images/feed2.jpg" alt="feed">
-                            <img src="comport/assets/images/feed3.jpg" alt="feed">
-                            <img src="comport/assets/images/feed4.jpg" alt="feed">
-                            <img src="comport/assets/images/feed5.jpg" alt="feed">
-                            <img src="comport/assets/images/feed6.jpg" alt="feed">
-                            <img src="comport/assets/images/feed7.jpg" alt="feed">
-                            <img src="comport/assets/images/feed8.jpg" alt="feed">
+                            <img src="/web/comport/assets/images/feed1.jpg" alt="feed">
+                            <img src="/web/comport/assets/images/feed2.jpg" alt="feed">
+                            <img src="/web/comport/assets/images/feed3.jpg" alt="feed">
+                            <img src="/web/comport/assets/images/feed4.jpg" alt="feed">
+                            <img src="/web/comport/assets/images/feed5.jpg" alt="feed">
+                            <img src="/web/comport/assets/images/feed6.jpg" alt="feed">
+                            <img src="/web/comport/assets/images/feed7.jpg" alt="feed">
+                            <img src="/web/comport/assets/images/feed8.jpg" alt="feed">
                         </div>
                     </div>
                 </div>

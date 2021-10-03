@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Flight */
+/* @var $model app\models\Trip */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="flight-form">
+<div class="trip-form">
 
     <?php $form = ActiveForm::begin(); ?>
 

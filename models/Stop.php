@@ -8,10 +8,10 @@ use Yii;
  * This is the model class for table "stop".
  *
  * @property int $id
- * @property int|null $id_flight
+ * @property int|null $id_trip
  * @property int|null $id_place
  *
- * @property Flight $flight
+ * @property Trip $trip
  * @property Place $place
  */
 class Stop extends \yii\db\ActiveRecord
@@ -30,9 +30,9 @@ class Stop extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_flight', 'id_place'], 'integer'],
-            [['id_flight'], 'exist', 'skipOnError' => true, 'targetClass' => Flight::className(), 'targetAttribute' => ['id_flight' => 'id']],
-            [['id_place'], 'exist', 'skipOnError' => true, 'targetClass' => Place::className(), 'targetAttribute' => ['id_place' => 'id']],
+            [['id_trip', 'id_place'], 'integer'],
+            [['id_trip'], 'exist', 'skipOnError' => true, 'targetClass' => Trip::class, 'targetAttribute' => ['id_trip' => 'id']],
+            [['id_place'], 'exist', 'skipOnError' => true, 'targetClass' => Place::class, 'targetAttribute' => ['id_place' => 'id']],
         ];
     }
 
@@ -43,19 +43,19 @@ class Stop extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'id_flight' => 'Id Flight',
+            'id_trip' => 'Id Trip',
             'id_place' => 'Id Place',
         ];
     }
 
     /**
-     * Gets query for [[Flight]].
+     * Gets query for [[Trip]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getFlight()
+    public function getTrip()
     {
-        return $this->hasOne(Flight::className(), ['id' => 'id_flight']);
+        return $this->hasOne(Trip::class, ['id' => 'id_trip']);
     }
 
     /**
@@ -65,6 +65,6 @@ class Stop extends \yii\db\ActiveRecord
      */
     public function getPlace()
     {
-        return $this->hasOne(Place::className(), ['id' => 'id_place']);
+        return $this->hasOne(Place::class, ['id' => 'id_place']);
     }
 }

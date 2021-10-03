@@ -45,7 +45,7 @@ AppAsset::register($this);
 
                 ['label' => 'Atp', 'url' => ['/admin/atp/index']],
                 ['label' => 'Bus', 'url' => ['/admin/bus/index']],
-                ['label' => 'Flight', 'url' => ['/admin/flight/index']],
+                ['label' => 'Trip', 'url' => ['/admin/trip/index']],
 
                 ['label' => 'Booking', 'url' => ['/admin/booking/index']],
                 ['label' => 'Cancel Booking', 'url' => ['/admin/booking/cancel']],

@@ -33,8 +33,8 @@ class Returns extends \yii\db\ActiveRecord
         return [
             [['id_user', 'id_booking'], 'integer'],
             [['ticket'], 'string', 'max' => 255],
-            [['id_booking'], 'exist', 'skipOnError' => true, 'targetClass' => Booking::className(), 'targetAttribute' => ['id_booking' => 'id']],
-            [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_user' => 'id']],
+            [['id_booking'], 'exist', 'skipOnError' => true, 'targetClass' => Booking::class, 'targetAttribute' => ['id_booking' => 'id']],
+            [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['id_user' => 'id']],
         ];
     }
 
@@ -58,7 +58,7 @@ class Returns extends \yii\db\ActiveRecord
      */
     public function getBooking()
     {
-        return $this->hasOne(Booking::className(), ['id' => 'id_booking']);
+        return $this->hasOne(Booking::class, ['id' => 'id_booking']);
     }
 
     /**
@@ -68,6 +68,6 @@ class Returns extends \yii\db\ActiveRecord
      */
     public function getUser()
     {
-        return $this->hasOne(User::className(), ['id' => 'id_user']);
+        return $this->hasOne(User::class, ['id' => 'id_user']);
     }
 }

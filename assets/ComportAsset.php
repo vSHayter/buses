@@ -27,6 +27,7 @@ class ComportAsset extends AssetBundle
         "comport/assets/css/owl-carousel.min.css",
         "comport/assets/css/nice-select.css",
         "comport/assets/css/style.css",
+        "css/site.css"
     ];
     public $js = [
         "comport/assets/js/vendor/jquery-2.2.4.min.js",

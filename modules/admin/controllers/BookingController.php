@@ -3,7 +3,7 @@
 namespace app\modules\admin\controllers;
 
 use Yii;
-use app\models\Booking;
+use app\modules\admin\models\BookingAdmin;
 use app\models\BookingSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -21,7 +21,7 @@ class BookingController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -65,7 +65,7 @@ class BookingController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Booking();
+        $model = new BookingAdmin();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -114,12 +114,12 @@ class BookingController extends Controller
      * Finds the Booking model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Booking the loaded model
+     * @return BookingAdmin the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Booking::findOne($id)) !== null) {
+        if (($model = BookingAdmin::findOne($id)) !== null) {
             return $model;
         }
 
@@ -140,7 +140,7 @@ class BookingController extends Controller
 
     public function actionApprove($id)
     {
-        $booking = Booking::findOne($id);
+        $booking = BookingAdmin::findOne($id);
         $booking->status = 1;
         $booking->save();
 
@@ -156,7 +156,7 @@ class BookingController extends Controller
 
     public function actionDrop($id)
     {
-        $booking = Booking::findOne($id);
+        $booking = BookingAdmin::findOne($id);
         $booking->status = 6;
         $booking->save();
 

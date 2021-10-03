@@ -1,4 +1,4 @@
-<!-- Contact Form Starts -->
+<!-- Booking Form Starts -->
 <section class="contact-form section-padding3">
     <div class="container">
         <div class="row">
@@ -32,29 +32,37 @@
                 </div>
             </div>
             <div class="col-lg-9">
-                <form action="<?= \yii\helpers\Url::toRoute(['booking/booking', 'id' => $flight]) ?>">
-                    <div class="left">
-                        <input type="text" name="name" placeholder="Введите Ваше имя" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Введите имя'" required>
-                        <input type="text" name="surname" placeholder="Введите Вашу фамилию" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Введите фамилию'" required>
-                        <input type="text" name="patronymic" placeholder="Введите Ваше отчество" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Введите Ваше отчество'" required>
-                        <input type="text" name="phone" placeholder="Введите Ваш номер" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Введите Ваш номер'" required>
-                        <input type="email" name="email" placeholder="Введите Ваш email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Введите email'" required>
-                        <input type="text" name="amount" placeholder="Введите кол-во билетов" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Введите кол-во билетов'" required>
-                    </div>
-                    <div class="right">
-                        <input type="date" name="date" required><br><br>
-                        <select name="payment" size="5" >
-                                <option value="" disabled selected>Выберите тип оплаты</option>
-                            <?php foreach ($payments as $payment): ?>
-                                <option value="<?=$payment->id?>"><?=$payment->type?></option>
-                            <?php endforeach; ?>
-                        </select>
-                        <textarea name="message" cols="20" rows="7"  placeholder="Введите пожелание" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Введите пожелание'" required></textarea>
-                    </div>
-                    <button type="submit" formmethod="post" class="template-btn">Забронировать сейчас</button>
-                </form>
+                <?php
+                    $form = \yii\widgets\ActiveForm::begin([
+                            'action' => ['booking/booking', 'id' => $trip],
+                            //'fieldClass' => ['class' => 'date-custom'],
+                            'fieldConfig' => [
+                                    'template' => '{input}',
+                                    'options' => [
+                                        'tag' => false,
+                                    ]
+                            ]
+                    ]);
+                    $model = new \app\models\Booking();
+                    $items = \yii\helpers\ArrayHelper::map($payments,'id', 'type');
+                ?>
+                <div class="left">
+                    <?= $form->field($model, 'name')->textInput(['placeholder' => 'Введи Ваше имя', 'required' => 'true', 'class' => '']); ?>
+                    <?= $form->field($model,'surname')->textInput(['placeholder' => 'Введите Вашу фамилию' , 'required' => 'true', 'class' => '']); ?>
+                    <?= $form->field($model,'patronymic')->textInput(['placeholder' => 'Введите Ваше отчество', 'required' => 'true', 'class' => '']); ?>
+                    <?= $form->field($model,'phone')->textInput(['placeholder' => 'Введите Ваш номер' , 'required' => 'true', 'class' => '']); ?>
+                    <?= $form->field($model,'email')->textInput(['placeholder' => 'Введите Ваш email' , 'required' => 'true', 'class' => '']); ?>
+                    <?= $form->field($model,'amount')->textInput(['placeholder' => 'Введите кол-во билетов', 'required' => 'true', 'class' => '']); ?>
+                </div>
+                <div class="right">
+                    <?= $form->field($model, 'date')->textInput(['type' => 'date', 'required' => 'true', 'class' => 'form-control date-custom']); ?>
+                    <?= $form->field($model, 'id_payment')->dropDownList($items, ['placeholder' => 'Введите пожелание', 'required' => 'true', 'class' => 'payment w-100']); ?>
+                    <?= $form->field($model, 'text')->textarea(['placeholder' => 'Введите пожелание', 'class' => '']); ?>
+                    <?= \yii\helpers\Html::submitButton('Забронировать сейчас', ['class' => 'template-btn']); ?>
+                </div>
+                <?php \yii\widgets\ActiveForm::end(); ?>
             </div>
         </div>
     </div>
 </section>
-<!-- Contact Form End -->
+<!-- Booking Form End -->
