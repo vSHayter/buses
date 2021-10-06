@@ -12,13 +12,16 @@ class TripController extends Controller
 {
     public function actionSearch()
     {
-        $from = Yii::$app->request->get('from');
-        $to = Yii::$app->request->get('to');
+        $values = [
+            'from' => Yii::$app->request->get('from'),
+            'to' => Yii::$app->request->get('to'),
+        ];
+
         $places = Place::find()->all();
 
-        $trip = Trip::find()
-            ->where(['id_from' => $from])
-            ->andWhere(['id_to' => $to])
+        $trip = Trip::find()->joinWith('place')
+            ->where(['id_from' => $values['from']])
+            ->andWhere(['id_to' => $values['to']])
             ->all();
 
         return $this->render('all', [
