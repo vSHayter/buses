@@ -5,7 +5,6 @@ namespace app\controllers;
 use app\models\Booking;
 use app\models\Trip;
 use app\models\Payment;
-use app\models\Place;
 use app\models\Returns;
 use Yii;
 use yii\web\Controller;
@@ -32,7 +31,7 @@ class BookingController extends Controller
             ->andWhere(['date' => Yii::$app->request->post()['Booking']['date']])
             ->all();
 
-        if (Yii::$app->request->post()['Booking']['amount'] < ($trip->bus->capacity - $queryBooking[0]->amount)) {
+        if (Yii::$app->request->post()['Booking']['amount'] <= ($trip->bus->capacity - $queryBooking[0]->amount)) {
 
             $values = [
                 'code' => strval(random_int(1000000000, 9999999999)),
@@ -69,7 +68,7 @@ class BookingController extends Controller
 
     public function actionDrop()
     {
-        $code = Yii::$app->request->post('code');
+        $code = Yii::$app->request->get('code');
 
         $query = Booking::find()
             ->where(['code' => $code])

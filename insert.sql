@@ -16,7 +16,7 @@ insert into bus values
 (null, "Honda Civic", "BB2222AB", "Конишев Эдуард Витальевич", 25, 1), (null, "Hyundai Elantra", "AA3333BA", "Сидоров Дмитрий Олегович", 25, 1),
 (null, "Mercedes Vito", "A666AA", "Вилецкий Алексей Игоревич", 50, 2),(null, "Volkswagen Vento", "A777BA", "Олейник Виктор Викторович", 50, 2),
 (null, "Citroen Berlingo", "B888AK", "Башаров Марат Дмиртриевич", 30, 3),(null, "Citroen Jumper", "B999BB", "Попов Герман Алексеевич", 30, 3);
-insert into flight values
+insert into trip values
 (null, 1, 3, '10:00:00', '16:00:00', "Каждый день", 1),
 (null, 2, 5, '12:50:00', '09:15:00', "Каждый день", 2),
 (null, 3, 6, '07:10:15','17:25:00', "Через день", 3),

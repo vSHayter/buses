@@ -50,13 +50,13 @@
                     <?= $form->field($model, 'name')->textInput(['placeholder' => 'Введи Ваше имя', 'required' => 'true', 'class' => '']); ?>
                     <?= $form->field($model,'surname')->textInput(['placeholder' => 'Введите Вашу фамилию' , 'required' => 'true', 'class' => '']); ?>
                     <?= $form->field($model,'patronymic')->textInput(['placeholder' => 'Введите Ваше отчество', 'required' => 'true', 'class' => '']); ?>
-                    <?= $form->field($model,'phone')->textInput(['placeholder' => 'Введите Ваш номер' , 'required' => 'true', 'class' => '']); ?>
-                    <?= $form->field($model,'email')->textInput(['placeholder' => 'Введите Ваш email' , 'required' => 'true', 'class' => '']); ?>
-                    <?= $form->field($model,'amount')->textInput(['placeholder' => 'Введите кол-во билетов', 'required' => 'true', 'class' => '']); ?>
+                    <?= $form->field($model,'phone')->textInput(['type' => 'number', 'placeholder' => 'Введите Ваш номер' , 'required' => 'true', 'class' => '']); ?>
+                    <?= $form->field($model,'email')->textInput(['type' => 'email', 'placeholder' => 'Введите Ваш email' , 'required' => 'true', 'class' => '']); ?>
+                    <?= $form->field($model,'amount')->textInput(['type' => 'number', 'placeholder' => 'Введите кол-во билетов', 'required' => 'true', 'class' => '']); ?>
                 </div>
                 <div class="right">
                     <?= $form->field($model, 'date')->textInput(['type' => 'date', 'required' => 'true', 'class' => 'form-control date-custom']); ?>
-                    <?= $form->field($model, 'id_payment')->dropDownList($items, ['placeholder' => 'Введите пожелание', 'required' => 'true', 'class' => 'payment w-100']); ?>
+                    <?= $form->field($model, 'id_payment')->dropDownList($items, ['required' => 'true', 'class' => 'payment w-100']); ?>
                     <?= $form->field($model, 'text')->textarea(['placeholder' => 'Введите пожелание', 'class' => '']); ?>
                     <?= \yii\helpers\Html::submitButton('Забронировать сейчас', ['class' => 'template-btn']); ?>
                 </div>

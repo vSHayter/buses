@@ -12,8 +12,8 @@ use yii\helpers\Url;
                     <h3>Отмена бронирования</h3>
                     <p>Введи номер бронирования для отмены</p>
                     <form action="<?= \yii\helpers\Url::toRoute(['booking/drop']) ?>">
-                        <input type="text" name="code" class="cancel-input" placeholder="Введите код" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Введите код'" required>
-                        <button type="submit" formmethod="post" class="template-btn">Отправить код</button>
+                        <input type="number" name="code" class="cancel-input" placeholder="Введите код" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Введите код'" required>
+                        <button type="submit" formmethod="get" class="template-btn">Отправить код</button>
                     </form>
                 </div>
             </div>
